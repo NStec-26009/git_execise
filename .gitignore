@@ -3,3 +3,12 @@
 
 # Ignore Gradle build output directory
 build
+
+# Compiled output (Eclipse / VS Code)
+bin/
+
+# IDE / OS
+.settings/
+.classpath
+.project
+.DS_Store
