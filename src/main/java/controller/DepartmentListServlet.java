@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import model.exception.ServiceException;
+import model.service.GetDepartmentListService;
 
 /**
  * P003【部門一覧画面】用コントローラー<br>
@@ -36,4 +37,3 @@ public class DepartmentListServlet extends HttpServlet {
 		return;
 	}
 }
-

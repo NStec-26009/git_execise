@@ -17,7 +17,7 @@ import model.util.ConnectionManager;
  * @author Fullness, Inc.
  *
  */
-public class GetDeptListService {
+public class GetDepartmentListService {
 	/**
 	 * リソースに登録されている全ての部門情報を取得
 	 *

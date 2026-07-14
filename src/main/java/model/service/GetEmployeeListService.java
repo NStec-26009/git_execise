@@ -25,7 +25,7 @@ public class GetEmployeeListService {
 	 * @return リソースに登録されている全ての社員情報とその社員が所属する部門名のリスト
 	 * @throws ServiceException リソースの接続に失敗、又は、情報の取得に失敗
 	 */
-	public List<Employee> readEmployeeAllWithDeptName() {
+	public List<Employee> readEmployeeAllWithDeptName() throws ServiceException {
 		ConnectionManager c = new ConnectionManager();
 		List<Employee> empList;
 		try (Connection connection = c.getConnection();) {
@@ -33,10 +33,10 @@ public class GetEmployeeListService {
 				EmployeeDAO dao = new EmployeeDAO(connection);
 				empList = dao.selectAllWithDepartment();
 			} catch (SQLException e) {
-				throw new Exception("取得失敗", e);
+				throw new ServiceException("取得失敗", e);
 			}
 		} catch (SQLException e) {
-			throw new Exception("DB処理エラー", e);
+			throw new ServiceException("DB処理エラー", e);
 		}
 		return empList;
 	}
