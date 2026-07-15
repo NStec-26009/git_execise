@@ -28,9 +28,6 @@ public class EmployeeUpdateSelectButtonServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// debug: log invocation and parameter
-		System.out
-				.println("DEBUG: EmployeeUpdateSelectButtonServlet#doPost invoked. empId=" + req.getParameter("empId"));
 
 		HttpSession session = req.getSession(false);
 		if (session == null) {
