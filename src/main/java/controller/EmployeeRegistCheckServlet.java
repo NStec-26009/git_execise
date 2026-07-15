@@ -37,7 +37,7 @@ public class EmployeeRegistCheckServlet extends HttpServlet {
 			resp.sendRedirect("menu");
 			return;
 		}
-		
+
 		session.removeAttribute("newEmpInput");
 		req.setAttribute("newEmpCheckViewData", employee);
 		req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertcheck.jsp").forward(req, resp);
@@ -61,6 +61,7 @@ public class EmployeeRegistCheckServlet extends HttpServlet {
 
 	/**
 	 * 入力パラメータを取得し新しい社員情報として返却
+	 * 
 	 * @param req HTTPリクエスト
 	 * @return 入力パラメータの社員情報
 	 */
@@ -84,4 +85,3 @@ public class EmployeeRegistCheckServlet extends HttpServlet {
 	}
 
 }
-
