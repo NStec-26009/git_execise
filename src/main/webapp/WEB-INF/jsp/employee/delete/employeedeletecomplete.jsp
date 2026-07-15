@@ -50,10 +50,7 @@
 							<input type="hidden" name="phone" value="${delEmpCompleteViewData.phone}">
 							<input type="hidden" name="mailAddress" value="${delEmpCompleteViewData.mailAddress}">
 							<input type="hidden" name="deptName" value="${delEmpCompleteViewData.department.deptName}">
-							<div style="display: inline-flex;">
-								<button type="submit" formaction="<%=request.getContextPath()%>/empdeletecheck"
-									class="btn btn-primary btn-lg m-3" name="regist" id="btnSubmit">削除</button>
-							</div>
+
 						</form>
 						<br>
 						<ul class="nav justify-content-center">
