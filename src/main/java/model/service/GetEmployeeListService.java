@@ -19,6 +19,7 @@ import model.util.ConnectionManager;
 public class GetEmployeeListService {
 
 	/**
+	 * 
 	 * リソースに登録されている全ての社員情報とその社員が所属する部門名を取得<br>
 	 * 社員情報が存在しない場合は空のリストを返却
 	 *

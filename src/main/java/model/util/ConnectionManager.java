@@ -32,13 +32,13 @@ public class ConnectionManager {
 	 */
 	private static final String PASSWORD = "postgres";
 
-    static {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("ドライバのロードに失敗しました", e);
-        }
-    }
+	static {
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("ドライバのロードに失敗しました", e);
+		}
+	}
 
 	/**
 	 * DBとのコネクションを取得し、返却
