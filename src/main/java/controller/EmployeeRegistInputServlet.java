@@ -40,25 +40,24 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 		if (errMsgs != null && !errMsgs.isEmpty()) {
 			session.removeAttribute("EmpRegistInputErrMsgs");
 			req.setAttribute("errMsgs", errMsgs);
-		}
 
-		Employee employee = (Employee) session.getAttribute("newEmpInput");
-		if (employee != null) {
-			session.removeAttribute("newEmpInput");
-		} // 追加
+			Employee employee = (Employee) session.getAttribute("newEmpInput");
+			if (employee != null) {
+				session.removeAttribute("newEmpInput");
+			} // 追加
 
-		try {
-			req.setAttribute("deptAllList", new InsertEmployeeService().readDepartmentAll());
-		} catch (Exception e) {
-			resp.sendRedirect("error");
+			try {
+				req.setAttribute("deptAllList", new InsertEmployeeService().readDepartmentAll());
+			} catch (Exception e) {
+				resp.sendRedirect("error");
+				return;
+			}
+
+			req.setAttribute("newEmpInputViewData", employee);
+			req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertinput.jsp").forward(req, resp);
 			return;
 		}
-
-		req.setAttribute("newEmpInputViewData", employee);
-		req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertinput.jsp").forward(req, resp);
-		return;
 	}
-	// }削除
 
 	/**
 	 * 社員登録入力画面の確認ボタンから実行され、入力内容をセッションに保存して確認画面にリダイレクト<br>
