@@ -19,7 +19,7 @@ import model.dto.Employee;
  *
  */
 @WebServlet("/empdeletecomp")
-public class EmployeeDeleteCompleteServlet extends HttpServlet{
+public class EmployeeDeleteCompleteServlet extends HttpServlet {
 
 	/**
 	 * 社員削除完了画面を表示<br>
@@ -34,14 +34,13 @@ public class EmployeeDeleteCompleteServlet extends HttpServlet{
 		if (employee == null) {
 			session.setAttribute("illegalOperationMsg", "不正な操作です");
 			resp.sendRedirect("menu");
+			return;
 		}
 		session.setAttribute("empDeletedFlg", true);
-		
+
 		session.removeAttribute("delEmpComplete");
 		req.setAttribute("delEmpCompleteViewData", employee);
 		req.getRequestDispatcher("WEB-INF/jsp/employee/delete/employeedeletecomplete.jsp").forward(req, resp);
 		return;
 	}
 }
-
-

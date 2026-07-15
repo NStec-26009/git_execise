@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 //コメントアウトを前文でするやり方 ＝ コントロールA ＋ /
+=======
+// コメントアウトを前文でするやり方 ＝ コントロールA ＋ /
+// 追加
+>>>>>>> origin/quality-control
 
 package model.service;
 
@@ -24,6 +29,7 @@ import util.TestUtil;
 @DisplayName("UC01【社員一覧表示】機能のテスト")
 public class GetEmployeeListServiceTest {
 
+<<<<<<< HEAD
 	/**
 	 * テスト対象
 	 */
@@ -89,4 +95,71 @@ public class GetEmployeeListServiceTest {
 			TestUtil.resetDBSetting();
 		}
 	}
+=======
+    /**
+     * テスト対象
+     */
+    GetEmployeeListService target;
+
+    /**
+     * 後処理
+     * 
+     * @throws Exception
+     */
+    @AfterAll
+    public static void tearDownAfterClass() throws Exception {
+        TestUtil.initDB();
+        TestUtil.setDS101ToDB();
+        TestUtil.setDS001ToDB();
+    }
+
+    /**
+     * 各テスト前に実行
+     * 
+     * @throws Exception
+     */
+    @BeforeEach
+    public void setUp() throws Exception {
+        TestUtil.initDB();
+        target = new GetEmployeeListService();
+    }
+
+    @Test
+    @DisplayName("社員情報とその社員が所属する部門名を複数取得:データあり")
+    public void testGetEmpListWithDeptName01() throws Exception {
+        TestUtil.setDS101ToDB();
+        TestUtil.setDS001ToDB();
+        List<Employee> expected = TestUtil.getDS001();
+        List<Employee> actual = target.readEmployeeAllWithDeptName();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("社員情報とその社員が所属する部門名を複数取得:データなし")
+    public void testGetEmpListWithDeptName02() throws Exception {
+        TestUtil.setDS101ToDB();
+        TestUtil.setDS002ToDB();
+        List<Employee> expected = TestUtil.getDS002();
+        List<Employee> actual = target.readEmployeeAllWithDeptName();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("社員情報とその社員が所属する部門名を複数取得:例外処理（取得失敗）")
+    public void testGetEmpListWithDeptName03() throws Exception {
+        TestUtil.clearDB();
+        assertThrows(ServiceException.class, () -> target.readEmployeeAllWithDeptName());
+    }
+
+    @Test
+    @DisplayName("社員情報とその社員が所属する部門名を複数取得:例外処理（DB処理エラー）")
+    public void testGetEmpListWithDeptName04() throws Exception {
+        TestUtil.changeDBSetting();
+        try {
+            assertThrows(ServiceException.class, () -> target.readEmployeeAllWithDeptName());
+        } finally {
+            TestUtil.resetDBSetting();
+        }
+    }
+>>>>>>> origin/quality-control
 }
