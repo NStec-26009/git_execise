@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;//追加
 import java.util.List;
 
 import model.dto.Department;
@@ -65,9 +66,9 @@ public class DepartmentDAO {
 	 * @throws SQLException 情報の取得に失敗
 	 */
 	public List<Department> selectAll() throws SQLException {
-		List<Department> deptList = new java.util.ArrayList<>();
-		try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_SQL);
-				ResultSet resultSet = preparedStatement.executeQuery()) {
+		List<Department> deptList = new ArrayList();// List<Department> deptList = null; から変更
+		try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_SQL);) {
+			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Department department = new Department();
 				department.setDeptId(resultSet.getInt("dept_id"));

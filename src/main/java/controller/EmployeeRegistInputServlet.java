@@ -38,13 +38,16 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 		@SuppressWarnings("unchecked")
 		List<String> errMsgs = (List<String>) session.getAttribute("EmpRegistInputErrMsgs");
 		if (errMsgs != null && !errMsgs.isEmpty()) {
+		List<String> errMsgs = (List<String>) session.getAttribute("EmpRegistInputErrMsgs");
+		if (errMsgs != null && !errMsgs.isEmpty()) {
 			session.removeAttribute("EmpRegistInputErrMsgs");
 			req.setAttribute("errMsgs", errMsgs);
+		}
 
-			Employee employee = (Employee) session.getAttribute("newEmpInput");
-			if (employee != null) {
-				session.removeAttribute("newEmpInput");
-			}
+		Employee employee = (Employee) session.getAttribute("newEmpInput");
+		if (employee != null) {
+			session.removeAttribute("newEmpInput");
+		} // 追加
 
 			try {
 				req.setAttribute("deptAllList", new InsertEmployeeService().readDepartmentAll());
@@ -53,11 +56,11 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 				return;
 			}
 
-			req.setAttribute("newEmpInputViewData", employee);
-			req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertinput.jsp").forward(req, resp);
-			return;
-		}
+		req.setAttribute("newEmpInputViewData", employee);
+		req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertinput.jsp").forward(req, resp);
+		return;
 	}
+	// }削除
 
 	/**
 	 * 社員登録入力画面の確認ボタンから実行され、入力内容をセッションに保存して確認画面にリダイレクト<br>
