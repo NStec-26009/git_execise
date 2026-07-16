@@ -21,7 +21,7 @@ import model.service.DeleteEmployeeService;
  *
  */
 @WebServlet("/empdeleteselectbutton")
-public class EmployeeDeleteSelectButtonServlet  extends HttpServlet {
+public class EmployeeDeleteSelectButtonServlet extends HttpServlet {
 
 	/**
 	 * 社員一覧画面の削除ボタンから実行され、入力内容をセッションに保存して確認画面にリダイレクト<br>
@@ -30,11 +30,11 @@ public class EmployeeDeleteSelectButtonServlet  extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
-		if(session==null) {
-			session=req.getSession(true);
+		if (session == null) {
+			session = req.getSession(true);
 			session.setAttribute("illegalOperationMsg", "不正な操作です");
 			resp.sendRedirect("menu");
-			return;			
+			return;
 		}
 
 		Employee targetEmp;
@@ -54,10 +54,11 @@ public class EmployeeDeleteSelectButtonServlet  extends HttpServlet {
 
 	/**
 	 * 入力パラメータを取得し社員IDとして返却
+	 * 
 	 * @param req HTTPリクエスト
 	 * @return 入力パラメータの社員ID
 	 */
-	private int getInputParameterEmpID(HttpServletRequest req){
+	private int getInputParameterEmpID(HttpServletRequest req) {
 		String empId = req.getParameter("empId");
 		return Integer.parseInt(empId);
 	}
