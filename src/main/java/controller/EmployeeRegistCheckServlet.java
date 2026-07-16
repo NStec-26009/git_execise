@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpSession;
 
 import model.dto.Department;
 import model.dto.Employee;
+import model.exception.ServiceException;//追加
+import model.service.InsertEmployeeService;//追加
 
 /**
  * P005【社員登録確認画面】用 コントローラー<br>
@@ -37,7 +39,7 @@ public class EmployeeRegistCheckServlet extends HttpServlet {
 			resp.sendRedirect("menu");
 			return;
 		}
-		
+
 		session.removeAttribute("newEmpInput");
 		req.setAttribute("newEmpCheckViewData", employee);
 		req.getRequestDispatcher("WEB-INF/jsp/employee/insert/employeeinsertcheck.jsp").forward(req, resp);
@@ -54,6 +56,12 @@ public class EmployeeRegistCheckServlet extends HttpServlet {
 		HttpSession session = req.getSession(true);
 		Employee employee = getInputParameterEmployee(req);
 
+		try {
+			new InsertEmployeeService().createEmployee(employee);
+		} catch (ServiceException e) {
+			resp.sendRedirect("error");
+			return;
+		} // try-catch追加
 		session.setAttribute("newEmpComplete", employee);
 		resp.sendRedirect("empregistcomp");
 		return;
@@ -61,6 +69,7 @@ public class EmployeeRegistCheckServlet extends HttpServlet {
 
 	/**
 	 * 入力パラメータを取得し新しい社員情報として返却
+	 * 
 	 * @param req HTTPリクエスト
 	 * @return 入力パラメータの社員情報
 	 */
@@ -84,4 +93,3 @@ public class EmployeeRegistCheckServlet extends HttpServlet {
 	}
 
 }
-
