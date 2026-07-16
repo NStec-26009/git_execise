@@ -4,6 +4,8 @@ package model.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -81,6 +83,42 @@ public class DeleteEmployeeServiceTest {
         TestUtil.changeDBSetting();
         try {
             assertThrows(ServiceException.class, () -> target.readEmployeeByEmpId(1001));
+        } finally {
+            TestUtil.resetDBSetting();
+        }
+    }
+
+    //テスト
+    @Test
+    @DisplayName("指定された社員情報をリソースから削除。削除に成功")
+    public void testDeleteEmployee01() throws Exception {
+        TestUtil.setDS101ToDB();
+        TestUtil.setDS001ToDB();
+        target.deleteEmployee(TestUtil.emp1001);
+        assertThrows(ServiceException.class, () -> target.readEmployeeByEmpId(1001));
+    }
+
+    @Test
+    @DisplayName("指定された社員情報をリソースから削除。削除対象の特定に失敗")
+    public void testDeleteEmployee02() throws Exception {
+        TestUtil.setDS101ToDB();
+        TestUtil.setDS002ToDB();
+        assertThrows(ServiceException.class, () -> target.deleteEmployee(TestUtil.emp1001));
+    }
+
+    @Test
+    @DisplayName("指定された社員情報をリソースから削除。情報の削除に失敗")
+    public void testDeleteEmployee03() throws Exception {
+        TestUtil.clearDB();
+        assertThrows(ServiceException.class, () -> target.deleteEmployee(TestUtil.emp1001));
+    }
+
+    @Test
+    @DisplayName("指定された社員情報をリソースから削除。DB処理エラー")
+    public void testDeleteEmployee04() throws Exception {
+        TestUtil.changeDBSetting();
+        try {
+            assertThrows(ServiceException.class, () -> target.deleteEmployee(TestUtil.emp1001));
         } finally {
             TestUtil.resetDBSetting();
         }
